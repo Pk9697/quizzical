@@ -3,7 +3,7 @@ import Quiz from './Quiz'
 export default function QuizList() {
 
   const [quizData,setQuizData]=React.useState([])
-  
+  const [showAnswer,setShowAnswer]=React.useState(false)
   // console.log("QuizList comp rendered")
   // console.log(quizData)
   React.useEffect(()=>{
@@ -28,17 +28,17 @@ export default function QuizList() {
       })
     ))
   }
-  // console.log(quizData)
+  console.log(quizData)
   return (
     <div className='quiz--list'>
         <div>
           {
             quizData.map(quiz=>{
-              return <Quiz key={quiz.id} {...quiz} selectAnswer={selectAnswer}/>
+              return <Quiz key={quiz.id} {...quiz} selectAnswer={selectAnswer} showAnswer={showAnswer}/>
             })
           }
         </div>
-        <button className='quiz--check--btn'>Check answers</button>
+        <button onClick={()=>setShowAnswer(prevState=>!prevState)} className='quiz--check--btn'>Check answers</button>
     </div>
 
   )

@@ -118,5 +118,11 @@ h3{
   background: #F5F7FB;
 }
 
+.answer-correct{
+  background: #94D7A2;
+}
 
+.answer-incorrect{
+  background: #F8BCBC;
+}
 
