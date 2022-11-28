@@ -20,12 +20,21 @@ export default function QuizList() {
       ))
   },[])
 
+  function selectAnswer(id,answer){
+    console.log(id,answer)
+    setQuizData(prevState=>(
+      prevState.map(quiz=>{
+        return quiz.id===id?{...quiz,selectedAnswer:answer}:quiz
+      })
+    ))
+  }
+  // console.log(quizData)
   return (
     <div className='quiz--list'>
         <div>
           {
             quizData.map(quiz=>{
-              return <Quiz key={quiz.id} {...quiz}/>
+              return <Quiz key={quiz.id} {...quiz} selectAnswer={selectAnswer}/>
             })
           }
         </div>

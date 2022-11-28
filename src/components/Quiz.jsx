@@ -1,6 +1,12 @@
 import React from 'react'
 
 export default function Quiz(props) {
+    const [answersState,setAnswersState]=React.useState([])
+    // const [shuffleOptions,setShuffleOptions]=React.useState(true)
+    React.useEffect(()=>{
+        // setShuffleOptions(false)
+        setAnswersState(getRandomAnswers())
+    },[])
     function getRandomAnswers(){
         const answers=props.incorrect_answers
         const correctAnswer=props.correct_answer
@@ -18,8 +24,15 @@ export default function Quiz(props) {
         // console.log(newAnswers)
         return newAnswers
     }
-    const answerElements=getRandomAnswers().map((answer,index)=>{
-        return <button key={index}>{answer}</button>
+
+    function handleAnswerClick(answer){
+        props.selectAnswer(props.id,answer)
+
+    }
+    
+    const answerElements=answersState.map((answer,index)=>{
+        const dynamicClass=props.selectedAnswer===answer?"answer-btn-selected" : "answer-btn"
+        return <button className={dynamicClass} key={index} onClick={()=>handleAnswerClick(answer)}>{answer}</button>
     })
     // console.log(answerElements)
   return (
