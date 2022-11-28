@@ -1,1 +1,59 @@
+* {
+  box-sizing: border-box;
+}
+body{
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  /* font-family: 'Karla', sans-serif; */
+  font-weight: 400;
+  color: #293264;
+  /* line-height: 1.25; */
+}
 
+/**********
+ Typography
+**********/
+
+h1{
+  font-family: 'Karla', sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  margin: 0;
+}
+
+button{
+  font-family: inherit;
+  font-weight: 500;
+}
+
+/**********
+  Layout
+**********/
+
+.App{
+  width: 90%;
+  margin: 0 auto;
+}
+
+/* Start page */
+
+.start--div{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* background-color: aqua; */
+}
+
+.start--btn{
+  background-color: #4D5B9E;
+  color: #F5F7FB;
+  font-size: 1rem;
+  line-height: 1.25;
+  padding: 1em 3.75em;
+  border: none;
+  border-radius: 15px;
+  margin-top: 1em;
+}

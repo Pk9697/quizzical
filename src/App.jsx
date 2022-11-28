@@ -1,10 +1,10 @@
 import React from 'react'
-
+import Start from './components/Start'
 function App() {
 
   return (
-    <div>
-      App comp
+    <div className='App'>
+      <Start/>
     </div>
   )
 }
