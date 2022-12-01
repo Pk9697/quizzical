@@ -5,8 +5,10 @@ export default function QuizList() {
   const [quizData,setQuizData]=React.useState([])
   const [showAnswer,setShowAnswer]=React.useState(false)
   const [apiCall,setApiCall]=React.useState(true)
+  const [countCorrectAnswers, setCountCorrectAnswers] = React.useState(0);
+
   // console.log("QuizList comp rendered")
-  // console.log(quizData)
+  console.log(quizData)
   React.useEffect(()=>{
     fetch('https://opentdb.com/api.php?amount=5')
       .then(res=>res.json())
@@ -20,6 +22,17 @@ export default function QuizList() {
         }))
       ))
   },[apiCall])
+
+  React.useEffect(() => {
+    let correctAnswers = 0;
+    quizData.forEach((quiz) => {
+      if (quiz.selectedAnswer === quiz.correct_answer) {
+        correctAnswers++;
+      }
+    });
+    setCountCorrectAnswers(correctAnswers);
+  }, [quizData]);
+
 
   function selectAnswer(id,answer){
 
@@ -42,7 +55,7 @@ export default function QuizList() {
     setShowAnswer(prevState=>!prevState)
   }
 
-  console.log(quizData)
+  // console.log(quizData)
   return (
     <div className='quiz--list'>
         <div>
@@ -52,7 +65,10 @@ export default function QuizList() {
             })
           }
         </div>
-        <button onClick={showAnswer?reset:check} className='quiz--check--btn'>{showAnswer ? "Play Again" : "Check Answers"}</button>
+        <div className='quiz--info'>
+          {showAnswer && <h5>You scored {countCorrectAnswers}/{quizData.length} correct answers</h5>}
+          <button onClick={showAnswer?reset:check} className='quiz--check--btn'>{showAnswer ? "Play Again" : "Check Answers"}</button>
+        </div>
     </div>
 
   )

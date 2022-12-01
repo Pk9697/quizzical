@@ -46,7 +46,7 @@ export default function Quiz(props) {
         }
         return <button className={`${dynamicClass} ${showAnswerClass}`} key={index} onClick={()=>handleAnswerClick(answer)}>{answer}</button>
     })
-    console.log(answerElements)
+    // console.log(answerElements)
   return (
     <div className='quiz'>
         <h3>{decode(props.question)}</h3>

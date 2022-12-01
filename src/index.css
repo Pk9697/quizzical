@@ -76,6 +76,16 @@ h3{
   align-items: center;
 }
 
+.quiz--info{
+  display: flex;
+  align-items: center;
+}
+
+.quiz--info > h5{
+  font-weight: 700;
+  margin-right: 2em;
+}
+
 .quiz--check--btn{
   color: #F5F7FB;
   background-color: #4D5B9E;
