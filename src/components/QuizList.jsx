@@ -4,6 +4,7 @@ export default function QuizList() {
 
   const [quizData,setQuizData]=React.useState([])
   const [showAnswer,setShowAnswer]=React.useState(false)
+  const [apiCall,setApiCall]=React.useState(true)
   // console.log("QuizList comp rendered")
   // console.log(quizData)
   React.useEffect(()=>{
@@ -18,27 +19,40 @@ export default function QuizList() {
           }
         }))
       ))
-  },[])
+  },[apiCall])
 
   function selectAnswer(id,answer){
-    console.log(id,answer)
-    setQuizData(prevState=>(
-      prevState.map(quiz=>{
-        return quiz.id===id?{...quiz,selectedAnswer:answer}:quiz
-      })
-    ))
+
+    if(!showAnswer){
+      console.log(id,answer)
+      setQuizData(prevState=>(
+        prevState.map(quiz=>{
+          return quiz.id===id?{...quiz,selectedAnswer:answer}:quiz
+        })
+      ))
+    }
   }
+
+  function check(){
+    setShowAnswer(prevState=>!prevState)
+  }
+
+  function reset(){
+    setApiCall(prevState=>!prevState)
+    setShowAnswer(prevState=>!prevState)
+  }
+
   console.log(quizData)
   return (
     <div className='quiz--list'>
         <div>
           {
             quizData.map(quiz=>{
-              return <Quiz key={quiz.id} {...quiz} selectAnswer={selectAnswer} showAnswer={showAnswer}/>
+              return <Quiz key={quiz.id} {...quiz} selectAnswer={selectAnswer} showAnswer={showAnswer} apiCall={apiCall}/>
             })
           }
         </div>
-        <button onClick={()=>setShowAnswer(prevState=>!prevState)} className='quiz--check--btn'>Check answers</button>
+        <button onClick={showAnswer?reset:check} className='quiz--check--btn'>{showAnswer ? "Play Again" : "Check Answers"}</button>
     </div>
 
   )

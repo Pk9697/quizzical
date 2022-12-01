@@ -1,25 +1,31 @@
 import React from 'react'
+import {decode} from 'html-entities'
 
 export default function Quiz(props) {
-    // const [answersState,setAnswersState]=React.useState(getRandomAnswers())
-    const [shuffleOptions,setShuffleOptions]=React.useState(true)
+
+    const [randomIndexState,setRandomIndexState]=React.useState(0)
     React.useEffect(()=>{
-        setShuffleOptions(false)
-        // setAnswersState(getRandomAnswers())
-    },[])
-    function getRandomAnswers(){
+        setRandomIndexState(getRandomIndex())
+    },[props.apiCall])
+
+    function getRandomIndex(){
+        const randomIndex=Math.floor(Math.random()*(props.incorrect_answers.length+1))
+        return randomIndex
+    }
+
+    function getAnswers(){
         const answers=props.incorrect_answers
         const correctAnswer=props.correct_answer
-        const randomIndex=Math.floor(Math.random()*(answers.length+1))
+        const randomIndex=randomIndexState
         // const randomIndex=0
-        console.log(randomIndex)
+        // console.log(randomIndex)
         const newAnswers=[]
         let idx=0;
         for(let i=0;i<answers.length+1;i++){
             if(i!=randomIndex){
-                newAnswers.push(answers[idx++])
+                newAnswers.push(decode(answers[idx++]))
             }else{
-                newAnswers.push(correctAnswer)
+                newAnswers.push(decode(correctAnswer))
             }
         }
         // console.log(newAnswers)
@@ -31,18 +37,19 @@ export default function Quiz(props) {
 
     }
     
-    const answerElements=getRandomAnswers().map((answer,index)=>{
-        const dynamicClass=props.selectedAnswer===answer?"answer-btn-selected" : "answer-btn"
+    const answerElements=getAnswers().map((answer,index)=>{
+        const dynamicClass=decode(props.selectedAnswer)===answer?"answer-btn-selected" : "answer-btn"
         let showAnswerClass=""
         if(props.showAnswer){
-            showAnswerClass=props.selectedAnswer===answer?props.selectedAnswer===props.correct_answer?"answer-correct" : "answer-incorrect":"answer-btn"
+            // showAnswerClass=decode(props.selectedAnswer)===answer?decode(props.selectedAnswer)===decode(props.correct_answer)?"answer-correct" : "answer-incorrect":answer===decode(props.correct_answer)?"answer-correct":"answer-btn"
+            showAnswerClass=answer===decode(props.correct_answer)?"answer-correct":decode(props.selectedAnswer)===answer?"answer-incorrect":"answer-btn"
         }
         return <button className={`${dynamicClass} ${showAnswerClass}`} key={index} onClick={()=>handleAnswerClick(answer)}>{answer}</button>
     })
-    // console.log(answerElements)
+    console.log(answerElements)
   return (
     <div className='quiz'>
-        <h3>{props.question}</h3>
+        <h3>{decode(props.question)}</h3>
         <div className="quiz--options">
             {answerElements}
         </div>
