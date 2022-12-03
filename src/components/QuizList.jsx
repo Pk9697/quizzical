@@ -13,7 +13,7 @@ export default function QuizList(props) {
   React.useEffect(()=>{
     // console.log("Apicall useEffect called")
     setIsLoading(true)
-    const url=`https://opentdb.com/api.php?amount=5&category=${props.categoryId}`
+    const url=`https://opentdb.com/api.php?amount=5&category=${props.formData.categoryId}&difficulty=${props.formData.difficulty}&type=${props.formData.type}`
     fetch(url)
       .then(res=>res.json())
       .then(data=>{
