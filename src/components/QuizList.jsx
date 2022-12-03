@@ -11,6 +11,7 @@ export default function QuizList() {
   // console.log("QuizList comp rendered")
   // console.log(quizData)
   React.useEffect(()=>{
+    // console.log("Apicall useEffect called")
     setIsLoading(true)
     fetch('https://opentdb.com/api.php?amount=5')
       .then(res=>res.json())
@@ -40,7 +41,7 @@ export default function QuizList() {
   function selectAnswer(id,answer){
 
     if(!showAnswer){
-      console.log(id,answer)
+      // console.log(id,answer)
       setQuizData(prevState=>(
         prevState.map(quiz=>{
           return quiz.id===id?{...quiz,selectedAnswer:answer}:quiz

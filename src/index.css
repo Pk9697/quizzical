@@ -84,6 +84,8 @@ h3{
 .quiz--info > h5{
   font-weight: 700;
   margin-right: 2em;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .quiz--check--btn{

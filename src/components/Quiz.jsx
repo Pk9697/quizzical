@@ -5,9 +5,12 @@ export default function Quiz(props) {
 
     const [randomIndexState,setRandomIndexState]=React.useState(0)
     React.useEffect(()=>{
+        // console.log("Quiz useEffect called")
+
         setRandomIndexState(getRandomIndex())
     },[props.apiCall])
-
+    // console.log("Quiz comp rendered")
+    
     function getRandomIndex(){
         const randomIndex=Math.floor(Math.random()*(props.incorrect_answers.length+1))
         return randomIndex
@@ -15,7 +18,7 @@ export default function Quiz(props) {
 
     function getAnswers(){
         const answers=props.incorrect_answers
-        const correctAnswer=decode(props.correct_answer)
+        const correctAnswer=props.correct_answer
         const randomIndex=randomIndexState%(answers.length+1)
         // console.log(correctAnswer,randomIndex,answers.length)
         // const randomIndex=0
