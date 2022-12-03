@@ -136,3 +136,10 @@ h3{
   background: #F8BCBC;
 }
 
+.loader--container{
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+

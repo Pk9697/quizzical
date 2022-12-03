@@ -1,18 +1,21 @@
 import React from 'react'
 import Quiz from './Quiz'
+import { ThreeDots } from 'react-loader-spinner'
 export default function QuizList() {
 
   const [quizData,setQuizData]=React.useState([])
   const [showAnswer,setShowAnswer]=React.useState(false)
   const [apiCall,setApiCall]=React.useState(true)
   const [countCorrectAnswers, setCountCorrectAnswers] = React.useState(0);
-
+  const [isLoading,setIsLoading]=React.useState(true)
   // console.log("QuizList comp rendered")
   // console.log(quizData)
   React.useEffect(()=>{
+    setIsLoading(true)
     fetch('https://opentdb.com/api.php?amount=5')
       .then(res=>res.json())
-      .then(data=>(
+      .then(data=>{
+        setIsLoading(false)
         setQuizData(data.results.map((quiz,index)=>{
           return {
             ...quiz,
@@ -20,7 +23,7 @@ export default function QuizList() {
             selectedAnswer:""
           }
         }))
-      ))
+  })
   },[apiCall])
 
   React.useEffect(() => {
@@ -57,19 +60,39 @@ export default function QuizList() {
 
   // console.log(quizData)
   return (
-    <div className='quiz--list'>
-        <div>
-          {
-            quizData.map(quiz=>{
-              return <Quiz key={quiz.id} {...quiz} selectAnswer={selectAnswer} showAnswer={showAnswer} apiCall={apiCall}/>
-            })
-          }
+    <>
+      {!isLoading?
+        <div className='quiz--list'>  
+            <div>
+              {
+                quizData.map(quiz=>{
+                  return <Quiz key={quiz.id} {...quiz} selectAnswer={selectAnswer} showAnswer={showAnswer} apiCall={apiCall}/>
+                })
+              }
+            </div>
+            <div className='quiz--info'>
+              {showAnswer && <h5>You scored {countCorrectAnswers}/{quizData.length} correct answers</h5>}
+              <button onClick={showAnswer?reset:check} className='quiz--check--btn'>{showAnswer ? "Play Again" : "Check Answers"}</button>
+            </div>
         </div>
-        <div className='quiz--info'>
-          {showAnswer && <h5>You scored {countCorrectAnswers}/{quizData.length} correct answers</h5>}
-          <button onClick={showAnswer?reset:check} className='quiz--check--btn'>{showAnswer ? "Play Again" : "Check Answers"}</button>
+        :   
+        <div className='loader--container'>
+          <ThreeDots 
+            height="80" 
+            width="80" 
+            radius="9"
+            color="#4D5B9E" 
+            ariaLabel="three-dots-loading"
+            wrapperStyle={{}}
+            wrapperClassName=""
+            visible={true}
+            />
         </div>
-    </div>
+      }   
+    </>
+
+
+
 
   )
 }
