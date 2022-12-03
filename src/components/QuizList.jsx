@@ -1,7 +1,7 @@
 import React from 'react'
 import Quiz from './Quiz'
 import { ThreeDots } from 'react-loader-spinner'
-export default function QuizList() {
+export default function QuizList(props) {
 
   const [quizData,setQuizData]=React.useState([])
   const [showAnswer,setShowAnswer]=React.useState(false)
@@ -13,7 +13,8 @@ export default function QuizList() {
   React.useEffect(()=>{
     // console.log("Apicall useEffect called")
     setIsLoading(true)
-    fetch('https://opentdb.com/api.php?amount=5')
+    const url=`https://opentdb.com/api.php?amount=5&category=${props.categoryId}`
+    fetch(url)
       .then(res=>res.json())
       .then(data=>{
         setIsLoading(false)
