@@ -15,8 +15,9 @@ export default function Quiz(props) {
 
     function getAnswers(){
         const answers=props.incorrect_answers
-        const correctAnswer=props.correct_answer
-        const randomIndex=randomIndexState
+        const correctAnswer=decode(props.correct_answer)
+        const randomIndex=randomIndexState%(answers.length+1)
+        // console.log(correctAnswer,randomIndex,answers.length)
         // const randomIndex=0
         // console.log(randomIndex)
         const newAnswers=[]
@@ -36,8 +37,9 @@ export default function Quiz(props) {
         props.selectAnswer(props.id,answer)
 
     }
-    
-    const answerElements=getAnswers().map((answer,index)=>{
+    const answerE=getAnswers()
+    // console.log(answerE)
+    const answerElements=answerE.map((answer,index)=>{
         const dynamicClass=decode(props.selectedAnswer)===answer?"answer-btn-selected" : "answer-btn"
         let showAnswerClass=""
         if(props.showAnswer){

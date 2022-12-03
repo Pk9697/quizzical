@@ -8,7 +8,7 @@ export default function QuizList() {
   const [countCorrectAnswers, setCountCorrectAnswers] = React.useState(0);
 
   // console.log("QuizList comp rendered")
-  console.log(quizData)
+  // console.log(quizData)
   React.useEffect(()=>{
     fetch('https://opentdb.com/api.php?amount=5')
       .then(res=>res.json())
