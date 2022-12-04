@@ -125,6 +125,8 @@ h3{
 
 .quiz--options{
   display: flex;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
   gap: 0.8125em;
   /* gap: 13px; */
   margin-bottom: 1em;
