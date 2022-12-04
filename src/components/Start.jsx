@@ -1,15 +1,7 @@
 import React from "react";
 
 export default function Start(props){
-
-    // const [formData, setFormData] = React.useState(
-    //     {
-    //         categoryId:""
-    //     }
-    // )    
-    // console.log(formData)
     
-
     const optionElements=props.categoriesArr.map(category=>{
         return <option key={category.id} value={category.id}>{category.name}</option>
     })

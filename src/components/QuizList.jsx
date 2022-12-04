@@ -61,22 +61,33 @@ export default function QuizList(props) {
   }
 
   // console.log(quizData)
+  function handleLoadStartPage(){
+    // ReactDOM.render(<Start/>)
+    window.location.reload(false);
+  }
   return (
     <>
       {!isLoading?
-        <div className='quiz--list'>  
-            <div>
-              {
-                quizData.map(quiz=>{
-                  return <Quiz key={quiz.id} {...quiz} selectAnswer={selectAnswer} showAnswer={showAnswer} apiCall={apiCall}/>
-                })
-              }
-            </div>
-            <div className='quiz--info'>
-              {showAnswer && <h5>You scored {countCorrectAnswers}/{quizData.length} correct answers</h5>}
-              <button onClick={showAnswer?reset:check} className='quiz--check--btn'>{showAnswer ? "Play Again" : "Check Answers"}</button>
-            </div>
-        </div>
+            quizData.length>0?
+              (<div className='quiz--list'> 
+                  <div>
+                    {
+                      quizData.map(quiz=>{
+                        return <Quiz key={quiz.id} {...quiz} selectAnswer={selectAnswer} showAnswer={showAnswer} apiCall={apiCall}/>
+                      })
+                    }
+                  </div>
+                  <div className='quiz--info'>
+                    {showAnswer && <h5>You scored {countCorrectAnswers}/{quizData.length} correct answers</h5>}
+                    <button onClick={showAnswer?reset:check} className='quiz--check--btn'>{showAnswer ? "Play Again" : "Check Answers"}</button>
+                  </div>
+              </div>)
+              :
+              <div className='quiz--list quiz--list--modifier'>
+                <h3>No questions found! </h3>
+                <button className='quiz--check--btn' onClick={handleLoadStartPage}>Refresh</button>
+              </div>
+            
         :   
         <div className='loader--container'>
           <ThreeDots 

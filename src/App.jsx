@@ -12,7 +12,7 @@ function App() {
         }
     )   
 
-  console.log(formData)
+  // console.log(formData)
   React.useEffect(()=>{
     fetch('https://opentdb.com/api_category.php')
       .then(res=>res.json())
