@@ -85,8 +85,10 @@ h3{
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
+  padding-top: 1em;
+  padding-bottom: 2em;
 }
 
 .quiz--list--modifier{
@@ -96,6 +98,7 @@ h3{
 .quiz--info{
   display: flex;
   align-items: center;
+  margin-top: 1em;
 }
 
 .quiz--info > h5{
