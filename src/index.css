@@ -85,7 +85,7 @@ h3{
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   align-items: center;
   padding-top: 1em;
   padding-bottom: 2em;
@@ -127,11 +127,16 @@ h3{
 }
 
 .quiz--options{
-  display: flex;
-  /* flex-direction: column; */
+  /* display: flex;
   flex-wrap: wrap;
   gap: 0.8125em;
+  margin-bottom: 1em; */
+  /* flex-direction: column; */
   /* gap: 13px; */
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(100px,1fr));
+  gap: 1em;
+  flex-wrap: wrap;
   margin-bottom: 1em;
 }
 
